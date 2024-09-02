@@ -10,7 +10,7 @@ export default function PostItems(props : any) {
     } = props;
     return (
         <>
-            <div className="w-[180px] h-auto">
+            <div className="xl:w-[180px]  h-auto">
               <Link href={link}>
                     <div className="">
                         <img src={image} alt={title} 

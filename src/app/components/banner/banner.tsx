@@ -4,7 +4,7 @@ export default function BannerPages(){
     return(
         <>
             <div 
-                className="w-[543px]"
+                className="xl:w-[543px] w-auto "
             >
                 <div 
                 className="w-full flex items-center rounded-[15px] bg-cover"

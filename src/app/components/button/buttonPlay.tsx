@@ -30,11 +30,9 @@ export default function ButtonPlay(props: any) {
         // Hiển thị tiêu đề
         const elementTitle = elementPlayAudio?.querySelector(".inner-title");
         elementTitle.innerHTML = props.title;
-
-
         const elementSingers = elementPlayAudio?.querySelector(".inner-singer");
         console.log(elementSingers)
-        elementSingers.innerHTML = props.singer;
+        elementSingers.innerHTML = props.singer
 
 
 
@@ -51,6 +49,7 @@ export default function ButtonPlay(props: any) {
         playAudio.onloadedmetadata = () => {
             const totalTime = playAudio.duration;
             playtotal.max = totalTime;
+           
 
 
             // Lấy ra thời gian hiện tại

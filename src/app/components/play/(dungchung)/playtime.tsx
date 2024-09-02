@@ -8,6 +8,8 @@ export default function PlayTime() {
         const playAudio = elementPlayAudio?.querySelector(".inner-audio");
 
         playAudio.currentTime = parseFloat(onChangeInput.value)
+        console.log(playAudio.currentTime)
+        // console.log(elementPlayAudio)
 
     }
     return (

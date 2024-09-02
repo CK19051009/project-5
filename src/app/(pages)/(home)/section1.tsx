@@ -23,7 +23,7 @@ export default async function Section1(){
                     listen : value.listen,
                     audio : value.audio,
                     title : value.title,
-                    singer:"Hồ Quang Hiếu, Huỳnh Văn",
+                    singer:value.singer,
                     wishlist : value.wishlist
                 });
 
@@ -46,7 +46,7 @@ export default async function Section1(){
             {/* left */}
                 <BannerPages />
                 {/* end left */}
-                <div className="ml-[20px] flex-1">
+                <div className="xl:ml-[20px] mt-[20px] flex-1">
                     <Title  
                         text="Nghe Nhiều"
                     />

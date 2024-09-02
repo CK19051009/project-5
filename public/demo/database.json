@@ -74,7 +74,8 @@
             ],
             "audio": "https://backend.daca.vn/assets/audios/cat-doi-noi-sau.mp3",
             "lyric": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-            "listen": 24500
+            "listen": 24500,
+            "singer": "Tăng Duy Tân"
         },
         "2": {
             "image": "https://backend.daca.vn/assets/images/ngay-mai-nguoi-ta-lay-chong.jpg",
@@ -85,7 +86,8 @@
             ],
             "audio": "https://backend.daca.vn/assets/audios/ngay-mai-nguoi-ta-lay-chong.mp3",
             "lyric": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-            "listen": 20500
+            "listen": 20500,
+            "singer": "Thành Đạt"
         },
         "3": {
             "image": "https://backend.daca.vn/assets/images/tat-ca-hoac-khong-la-gi-ca.jpg",
@@ -96,7 +98,8 @@
             ],
             "audio": "https://backend.daca.vn/assets/audios/tat-ca-hoac-khong-la-gi-ca.mp3",
             "lyric": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-            "listen": 18800
+            "listen": 18800,
+            "singer": "Cao Thái Sơn "
         },
         "4": {
             "image": "https://backend.daca.vn/assets/images/ruou-mung-hoa-nguoi-dung.jpg",
@@ -108,7 +111,8 @@
             ],
             "audio": "https://backend.daca.vn/assets/audios/ruou-mung-hoa-nguoi-dung.mp3",
             "lyric": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-            "listen": 22800
+            "listen": 22800,
+            "singer": "TLong"
         }
     }
 }

@@ -12,7 +12,6 @@ export default function Section1() {
     const keywordDefault = searchParams.get("keyword") || "";
     const [data, setData] = useState([]);
 
-    console.log(keywordDefault)
 
     useEffect(() => {
         const fetchApi = async () => {
