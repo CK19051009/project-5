@@ -1,34 +1,27 @@
 import Cardsong from "@/app/components/card/cardsong";
 import Section2 from "./section2";
-import { onValue, ref } from "firebase/database";
-import { dataFirebase } from "@/app/firebaseConfig";
+import axios from "axios";
 
-export default async function Chitietcasi({params } : {params : { id : string}} ) {
-
-  const result :any = await new  Promise((resolver) => {
-    const singersRef = ref(dataFirebase , `singers/${params.id}`)
+export default async function Chitietcasi({
+  params,
+}: {
+  params: { id: string };
+}) {
+  const api_host = process.env.NEXT_PUBLIC_API_HOST;
   
-  
- 
-    onValue(singersRef , (snapshot) => {
-      const data = snapshot.val();
-      resolver(data)
+  const res = await axios.get(
+    `${api_host}/client/singers/detail/${params.id}`
+  );
+  const data = res.data.data;
 
-    });
-  }); 
-
-
-
-    return (
-        <>
-          <Cardsong 
-            image ={result.image}
-            title ={result.title}
-            desc = {result.description}
-          />
-          <Section2 singerId = {params.id}/>
-
-
-        </>
-    );
-  }
+  return (
+    <>
+      <Cardsong
+        image={data.avatar}
+        title={data.fullName}
+        desc={data.description}
+      />
+      <Section2 singerId={params.id} />
+    </>
+  );
+}

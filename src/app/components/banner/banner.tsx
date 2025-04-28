@@ -1,10 +1,12 @@
+import Image from "next/image";
+
 export default function BannerPages(){
 
 
     return(
         <>
             <div 
-                className="xl:w-[543px] w-auto "
+                className="xl:w-[543px] md:w-auto   "
             >
                 <div 
                 className="w-full flex items-center rounded-[15px] bg-cover"
@@ -21,9 +23,11 @@ export default function BannerPages(){
                     </div>
 
                     <div className="w-[215px] mt-[40px] mr-[21px]">
-                            <img 
-                            src="/demo/person_section1.png" alt="person1" 
-                            className="w-full h-auto"
+                            <Image
+                                src="/demo/person_section1.png" alt="person1" 
+                                className="w-full h-auto"
+                                width={215}
+                                height={100}
                             />
                     </div>
 

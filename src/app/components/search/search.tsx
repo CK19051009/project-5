@@ -11,9 +11,12 @@ export default function Search () {
         event.preventDefault();
 
         const keyword = event.target.keyword.value;
-        console.log(keyword)
+        // console.log(keyword)
         if(keyword){
             router.push(`/search?keyword=${keyword}`)
+        }
+        else{
+            router.push(`/`)
         }
 
         

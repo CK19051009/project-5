@@ -1,4 +1,5 @@
 
+import Image from "next/image";
 import Link from "next/link";
 
 export default function Cardsong(props : any){
@@ -15,8 +16,10 @@ export default function Cardsong(props : any){
               <div className="flex items-center justify-center h-[180px]">
                   <Link href="">
                       <div className="w-[177px] h-full rounded-[15px]">
-                        <img src={image} alt=""
-                            className="w-full h-full truncate aspect-square rounded-[15px] "
+                        <Image src={image} alt=""
+                            className="w-full h-full truncate aspect-square rounded-[15px]"
+                            height={100}
+                            width={100}
                         />
 
                       </div>

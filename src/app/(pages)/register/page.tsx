@@ -3,33 +3,38 @@
 import Button from "@/app/components/button/button";
 import FormInput from "@/app/components/form/forminput";
 import Title from "@/app/components/title/title";
-import { authFirebase, dataFirebase } from "@/app/firebaseConfig";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { ref, set } from "firebase/database";
+import axios from "axios";
 import { useRouter } from "next/navigation";
-
+import Cookies from 'js-cookie';
 export default function RegisterPage() {
-
+  const api_host = process.env.NEXT_PUBLIC_API_HOST;
   const router = useRouter();
-  const handleRegister = (event: any) => {
+  const handleRegister = async (event : React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const fullName = event.target.Fullname.value;
-    const email = event.target.Email.value;
-    const password = event.target.Password.value;
-    createUserWithEmailAndPassword(authFirebase, email, password) // hám trong firebase có thể đọc docs
-      .then((userCredential) => {
-        const user = userCredential.user;
-        if (user) {
-          set(ref(dataFirebase, 'users/' + user.uid), {
-            fullName: fullName
-          }).then(() => {
-            router.push("/")
-          });
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    const formData = event.currentTarget;
+    const data = {
+      fullName: formData.Fullname.value,
+      email: formData.email.value,
+      password: formData.password.value
+    };
+
+    try {
+      const res = await axios.post(
+        `${api_host}/client/authen/register`,
+        data
+      );
+      // console.log(res.data)
+      if (res.data.success && res.data.token) {
+        Cookies.set("authToken", res.data.token);
+        router.push("/");
+      } else {
+        alert("Đăng ký thất bại: " + res.data.message);
+      }
+    } catch (error: any) {
+           // Xử lý lỗi khi gọi API
+           console.error("Error during registration:", error.response?.data || error.message);
+           alert("Đăng ký thất bại. Vui lòng thử lại!");
+    }
   }
   return (
     <>
@@ -56,7 +61,7 @@ export default function RegisterPage() {
           <FormInput
             label="Email"
             type="Email"
-            name="Email"
+            name="email"
             placeholder="Ví dụ: levana@gmail.com"
             required={true}
             id="Email"
@@ -67,7 +72,7 @@ export default function RegisterPage() {
           <FormInput
             label="Password"
             type="Password"
-            name="Password"
+            name="password"
             placeholder=""
             required={true}
             id="Password"

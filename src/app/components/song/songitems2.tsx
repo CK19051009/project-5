@@ -3,12 +3,12 @@ import Link from "next/link";
 import ButtonPlay from "../button/buttonPlay";
 import ButtonHeart2 from "../button/buttonHeart2";
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 export default function Songitems2(props : any){
     const {
         image  ="",
         title = "",
         singer = "",
-
         link = "",
         audio = "",
         wishlist =""
@@ -33,6 +33,7 @@ export default function Songitems2(props : any){
             const handleLoadedMetadata = () => {
                 if (audioRef.current) {
                     const totalTime = audioRef.current.duration;
+                    console.log(totalTime)
                     const minutes = Math.floor(totalTime / 60);
                     const seconds = Math.floor(totalTime % 60);
                     setTimesong(`${minutes}:${seconds < 10 ? '0' : ''}${seconds}`);
@@ -57,9 +58,11 @@ export default function Songitems2(props : any){
                       <ButtonPlay {...props}  className = "w-[18px] h-[24px] mr-[9px]" />
 
                       <Link href={link}>
-                          <img src={image}
+                          <Image src={image}
                               className="w-[42px] object-cover rounded-[15px]"
-                              alt={image} />
+                              alt={image}
+                              width={42}
+                              height={42} />
                       </Link>
                       <div className="font-bold text-[14px] text-white ml-[12px]">{title}</div>
                     </div>

@@ -3,27 +3,44 @@
 import Button from "@/app/components/button/button";
 import FormInput from "@/app/components/form/forminput";
 import Title from "@/app/components/title/title";
-import { authFirebase } from "@/app/firebaseConfig";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import Cookies from "js-cookie";
+import axios from "axios";
+
 import { useRouter } from "next/navigation";
 
-
+import { useAuthen } from "@/app/context/AppProvider";
 export default function LoginPage() {
+    const api_host = process.env.NEXT_PUBLIC_API_HOST;
+    const {setToken} = useAuthen()
     const router = useRouter();
-    const handleLogin = (event:any) => {
+    const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
-      const email = event.target.Email.value;
-      const password = event.target.Password.value;
-      signInWithEmailAndPassword(authFirebase, email, password) // hàm cho kiểm tra dữ liệu trong database cho phép chúng ta đang nhâpk
-      .then((userCredential) => {
-        const user = userCredential.user;
-        if(user) {
+      const formData = event.currentTarget;
+      const email = formData.Email.value;
+      const password = formData.Password.value;
+      const data ={
+        email : email,
+        password : password
+      }
+      try {
+        const res = await axios.post(`${api_host}/client/authen/login`, data)
+        console.log(res)
+        if (res.data.success && res.data.token){
+          Cookies.set("authToken", res.data.token)
+          setToken(res.data.token)
+        
           router.push("/")
+          window.location.href = "/";
+          router.refresh();
         }
-      })
-      .catch((error) => {
-          alert("Tai khoan mat khau sai")
-      });
+        else{
+          alert("Tài khoản mật khẩu sai!")
+        }
+      } catch (error:any) {
+        // Xử lý lỗi khi gọi API
+        console.error("Error during registration:", error.response?.data || error.message);
+        alert("Đăng ký thất bại. Vui lòng thử lại!");
+      }
     }
     return (
         <>

@@ -1,37 +1,23 @@
 import Songlist2 from "@/app/components/song/songlist2";
 import Title from "@/app/components/title/title";
-import { dataFirebase } from "@/app/firebaseConfig";
+import axios from "axios";
 
-import { equalTo, onValue, orderByChild, query, ref } from "firebase/database";
 
 export default async function Section2(props : {id : string}) {
     const {id} = props;
-    let result : any = await new Promise((serolver) => {
-        const songRef = ref(dataFirebase , "songs");
-        const songQuery = query(songRef , orderByChild("categoryId") , equalTo(id))
-
-        onValue(songQuery , async (snapshot) => {
-            const data : any = []
-            for (const key in snapshot.val()){
-                const value = snapshot.val()[key]
-
-
-                data.push({
-                    id : key,
-                    title: value.title,
-                    image : value.image,
-                    audio : value.audio,
-                    listen : value.listen,
-                    link : `/song/${key}`,
-                    wishlist : value.wishlist,
-                    singer : value.singer
-                })
-            }
-
-            serolver(data)
-        });
-    });
-    console.log(result)
+    const api_host = process.env.NEXT_PUBLIC_API_HOST;
+    const res = await axios.get(`${api_host}/client/songs/topic/${id}`)
+    const data = res.data.data;
+    const result = data.map((item:any) => ({
+        id : item._id,
+        title: item.title,
+        image : item.thumbnail[0],
+        audio : item.audio[0],
+        listen : item.listen,
+        link : `/song/${item._id}`,
+        wishlist : item.wishlist,
+        singer : item.singers
+    }))
     return (
 
         <>
